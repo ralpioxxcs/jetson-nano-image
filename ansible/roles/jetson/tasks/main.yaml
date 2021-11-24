@@ -18,9 +18,9 @@
     state: present
   loop:
     - libgles2
+    - libasound2
     - libpangoft2-1.0-0
     - libharfbuzz0b
-    - libgles2
     - libdatrie1
     - libxkbcommon0
     - libwayland-egl1
@@ -30,7 +30,6 @@
     - libpixman-1-0
     - libjpeg-turbo8
     - libinput10
-    - libgles2
     - libevdev2
     - libcairo2
     - device-tree-compiler
@@ -40,7 +39,7 @@
     - libpython3-stdlib
     - libpython3.8-minimal
     - libpython3.8-stdlib
-    - libreadline8
+    - libreadline-dev
     - libtinfo5
     - python3-minimal
     - python3.8
@@ -60,10 +59,6 @@
     - libxcb-sync1
     - libxcb-xfixes0
     - libxshmfence1
-    - libpython2-stdlib
-    - python2
-    - python2-minimal
-    - python-is-python2
     - libgstreamer1.0-0
     - libgstreamer-plugins-bad1.0-0
     - libpangocairo-1.0-0
@@ -77,27 +72,44 @@
     - build-essential
     - btrfs-progs
     - cmake
+    - wget
     - curl
-    - dnsutils
     - htop
     - iotop
-    - isc-dhcp-client
     - iputils-ping
+    - apt-utils
     - kmod
     - linux-firmware
     - locales
     - net-tools
     - netplan.io
     - pciutils
+    - usbutils
     - python3-dev
     - ssh
+    - sshpass
+    - rsync
     - sudo
     - systemd
     - udev
     - unzip
-    - usbutils
     - vim
     - wpasupplicant
+
+- name: Install my packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - git
+    - inotify-tools
+    - libboost-all-dev
+    - qt5-default
+    - pkg-config
+    - libgtk2.0-dev
+    - libavcodec-dev
+    - libavformat-dev
+    - libswscale-dev
 
 - name: Generate locales
   locale_gen:

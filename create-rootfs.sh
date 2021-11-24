@@ -2,12 +2,13 @@
 
 #
 # Author: Badr BADRI © pythops
+# Modifier: ralpioxxcs
 #
 
 set -e
 
 ARCH=arm64
-RELEASE=focal
+RELEASE=bionic # 18.04.x
 
 # Check if the user is not root
 if [ "x$(whoami)" != "xroot" ]; then
@@ -17,7 +18,7 @@ fi
 
 # Check for env variables
 if [ ! $JETSON_ROOTFS_DIR ]; then
-	printf "\e[31mYou need to set the env variable \$JETSON_ROOTFS_DIR\e[0m\n"
+    printf "\e[31mYou need to set the env variable \$JETSON_ROOTFS_DIR\e[0m\n"
 	exit 1
 fi
 
