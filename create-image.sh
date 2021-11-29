@@ -39,12 +39,16 @@ while true; do
 
   if [ "$ans" != "${ans#[1]}" ] ;then
     bsp=${bsp_32_6_1}
+    break
   elif [ "$ans" != "${ans#[2]}" ] ;then
     bsp=${bsp_32_5_2}
+    break
   elif [ "$ans" != "${ans#[3]}" ] ;then
     bsp=${bsp_32_5_1}
+    break
   elif [ "$ans" != "${ans#[4]}" ] ;then
     bsp=${bsp_32_5}
+    break
   else
     echo "Please select valid number"
   fi
@@ -93,7 +97,7 @@ mkdir -p ${JETSON_BUILD_DIR}
 
 # Download L4T
 if [ ! "$(ls -A ${JETSON_BUILD_DIR})" ]; then
-        printf "\e[32mDownload L4T..."
+        printf "\e[32mDownload L4T... "
         wget -qO- ${bsp} | tar -jxpf - -C ${JETSON_BUILD_DIR}
 	rm ${JETSON_BUILD_DIR}/Linux_for_Tegra/rootfs/README.txt
         printf "[OK]\n"
@@ -106,12 +110,12 @@ patch ${JETSON_BUILD_DIR}/Linux_for_Tegra/nv_tegra/nv-apply-debs.sh < patches/nv
 
 pushd ${JETSON_BUILD_DIR}/Linux_for_Tegra/ > /dev/null
 
-printf "Extract L4T binaries ..."
+printf "Extract L4T binaries ... \e[0m\n"
 ./apply_binaries.sh
-printf "[OK]\n"
+printf "\e[32m[OK]\e[0m\n"
 
 if [ ${JETSON_NANO_STORAGE_TYPE} == "emmc" ]; then
-        printf "Done! \e[0m\n"
+        printf "\e[32mDone!\e[0m\n"
         printf "\"emmc\" type pass create image blob stage,, run \"flash_emmc.sh\" next\n"
         exit 0
 fi
